@@ -10,6 +10,7 @@ import HomeScreen from './Home'
 import { firstLaunchCheck, INC, DEC } from "../actions/index";
 import {AsyncStorage} from 'react-native';
 import {connect} from 'react-redux'
+import { Toast } from 'native-base';
 
 import { withNavigation } from 'react-navigation';
 

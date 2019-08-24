@@ -8,7 +8,6 @@ import { BackHandler } from 'react-native';
 import AnimatedLoader from "react-native-animated-loader";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {Linking} from 'react-native'
-import Toast from 'react-native-simple-toast';
 import call from 'react-native-phone-call'
 import sms from 'react-native-sms-linking'
 import {
@@ -22,6 +21,7 @@ import {
   UIActivityIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
+import { Toast } from 'native-base';
 
 class HelloWorld extends React.Component {
     constructor(props){
@@ -83,7 +83,6 @@ class HelloWorld extends React.Component {
 
     sms_helper(){
       if(!this.state.data.user.mobile_no){
-        Toast.show("Number Not Found", Toast.SHORT);
         return
       }
       sms(this.state.data.user.mobile_no, 'Hi friend').catch(console.error)
@@ -91,11 +90,10 @@ class HelloWorld extends React.Component {
 
     call_helper(){
       if(!this.state.data.user.mobile_no){
-        Toast.show("Number Not Found", Toast.SHORT);
         return
       }
       const args = {
-        number: this.state.data.user.mobile_no, // String value with the number to call
+        number: '923089134961',//this.state.data.user.mobile_no, // String value with the number to call
         prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
       }
       call(args).catch(console.error)
@@ -112,11 +110,6 @@ class HelloWorld extends React.Component {
     }
         const {navigate} = this.props.navigation;
         if(this.state.isLoading == false){
-          
-          const args = {
-            number: this.state.data.user.mobile_no, // String value with the number to call
-            prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
-          }
           let pic_data = []
           for(let i=0;i<this.state.data.pictures.length; i++){
               pic_data[i] = {url: this.state.data.pictures[i]}
@@ -131,7 +124,7 @@ class HelloWorld extends React.Component {
               {Loading}
                 <Text style={{color: 'white', fontSize: 24}}>{this.state.data.title}</Text>
                 <Text style={{color: 'white', fontSize: 12}}>{this.state.data.city.name} | Added at {this.state.data.created_at} | Ad ID : {this.state.data.post_id}</Text>
-                <View style={{flex: 0.8, alignSelf:'center'}}>
+                <View style={{height: 300, alignSelf:'center'}}>
                     <Slideshow 
                     resizeMode={'contain'}   /* <= changed  */
                     style={{ height: 80, width: '60%', top: 30, bottom: 20}}

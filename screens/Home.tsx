@@ -31,6 +31,7 @@ import {
   UIActivityIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
+import { Toast } from 'native-base';
 
 class HomeScreen extends Component {
   constructor(props) {

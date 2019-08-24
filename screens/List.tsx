@@ -9,7 +9,6 @@ import {
   TouchableHighlight,
   Image,
   FlatList,
-  CheckBox,
   ScrollView,
   Alert,
   AsyncStorage
@@ -29,7 +28,8 @@ import {
   UIActivityIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
-import Toast from 'react-native-simple-toast';
+import { Container,CheckBox, Header, Content, Icon, Picker, Form } from "native-base";
+import { Toast } from 'native-base';
 
 
 class ListScreen extends Component {
@@ -82,7 +82,6 @@ class ListScreen extends Component {
           this.setState({data: responseJson.data.products, isLoading: false})
         }
         else {
-          Toast.show(responseJson.error, Toast.SHORT)
           this.setState({isLoading: false})
         }
       })
@@ -130,7 +129,6 @@ class ListScreen extends Component {
           this.setState({data: responseJson.data.products, isLoading: false})
         }
         else {
-          Toast.show(responseJson.error, Toast.SHORT)
           this.setState({isLoading: false})
         }
       })
@@ -166,24 +164,27 @@ class ListScreen extends Component {
           <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={{flex: 1/3, flexDirection: 'row'}}>
               <CheckBox
-                    value={this.state.all}
-                    onChange={() => this.update('all')}
+                    checked={this.state.all}
+                    color="white"
+                    onPress={() => this.update('all')}
                 />
-              <Text style={{color: 'white', top: 5, left: 5}}>All</Text>
+              <Text style={{color: 'white', left: 15}}>All</Text>
             </View>
             <View style={{flex: 1/3, flexDirection: 'row'}}>
               <CheckBox
-                    value={this.state.sale}
-                    onChange={() => this.update('sale')}
+                    checked={this.state.sale}
+                    color="white"
+                    onPress={() => this.update('sale')}
                 />
-              <Text style={{color: 'white', top: 5, left: 5}}>Sale</Text>
+              <Text style={{color: 'white', left: 15}}>Sale</Text>
             </View>
             <View style={{flex: 1/3, flexDirection: 'row'}}>
               <CheckBox
-                    value={this.state.rent}
-                    onChange={() => this.update('rent')}
+                    checked={this.state.rent}
+                    color="white"
+                    onPress={() => this.update('rent')}
                 />
-              <Text style={{color: 'white', top: 5, left: 5}}>Rent</Text>
+              <Text style={{color: 'white', left: 15}}>Rent</Text>
             </View>
           </View>
         </View>

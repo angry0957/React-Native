@@ -21,7 +21,6 @@ import {
   Input,
   BackHandler,
   TextInput,
-  ToastAndroid,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Modal,
@@ -42,7 +41,7 @@ import {
   UIActivityIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
-import Toast from 'react-native-simple-toast';
+import { Toast } from 'native-base';
 
 
 export default class ContactDetailScreen extends React.Component {
@@ -94,11 +93,9 @@ export default class ContactDetailScreen extends React.Component {
 
     contact(){
       if(this.state.email == ''){
-        Toast.show('Enter Email!', Toast.SHORT)
         return
       }
       else if(this.state.message == ''){
-        Toast.show('Enter Message!', Toast.SHORT)
         return
       }
       this.setState({isLoading: true})
@@ -126,12 +123,20 @@ export default class ContactDetailScreen extends React.Component {
         .then((responseJson) => {
           if(responseJson.result){
             this.setState({isLoading: false})
-            Toast.show(responseJson.data.msg, Toast.SHORT);
+             Toast.show({
+              text: 'Mail Sent',
+              buttonText: 'Okay',
+              type: "success"
+               })
             navigate('Home')
           }
           else {
+             Toast.show({
+              text: responseJson.error,
+              buttonText: 'Okay',
+              type: "danger"
+       })
             this.setState({isLoading: false})
-            Toast.show(responseJson.error, Toast.SHORT);
           }
         })
         .catch((error) =>{

@@ -9,7 +9,6 @@ import {
   Image,
   Text,
   StatusBar,
-  ToastAndroid,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Modal,

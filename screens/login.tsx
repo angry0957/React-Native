@@ -5,6 +5,7 @@
  * @format
  * @flow
  */
+import { Toast } from 'native-base';
 
 import React, {Fragment, Component} from 'react';
 import {
@@ -17,7 +18,6 @@ import {
   Image,
   Text,
   StatusBar,
-  ToastAndroid,
   TouchableOpacity,
   ImageBackground,
   TouchableWithoutFeedback,
@@ -31,11 +31,6 @@ import { firstLaunchCheck, INC, DEC } from "../actions/index";
 import Loader from './LoaderScreen';
 import { withNavigation } from 'react-navigation';
 import {AsyncStorage} from 'react-native';
-import AnimatedLoader from "react-native-animated-loader";
-import { Bubbles, DoubleBounce, Bars, Pulse } from 'react-native-loader';
-import Spinner from 'react-native-loading-spinner-overlay';
-import ProgressLoader from 'rn-progress-loader';
-import Toast from 'react-native-simple-toast';
 
 import {
   BallIndicator,
@@ -108,11 +103,19 @@ class LoginScreen extends Component {
   login(){
     const {navigate} = this.props.navigation;
     if(this.state.email == ''){
-      Toast.show('Enter Username!', Toast.SHORT)
+      Toast.show({
+              text: 'Enter Username!',
+              buttonText: 'Okay',
+              type: "danger"
+       })
       return
     }
     else if(this.state.password == ''){
-      Toast.show('Enter Password!', Toast.SHORT)
+      Toast.show({
+              text: 'Enter Password!',
+              buttonText: 'Okay',
+              type: "danger"
+       })
       return
     }
     this.setState({isLoading: true})
@@ -145,8 +148,12 @@ class LoginScreen extends Component {
           navigate('Home_')
         }
         else {
+          Toast.show({
+              text: responseJson.error,
+              buttonText: 'Okay',
+              type: "danger"
+       })
           this.setState({isLoading: false})
-          Toast.show(responseJson.error, Toast.SHORT);
         }
       })
       .catch((error) =>{

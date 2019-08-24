@@ -13,7 +13,6 @@ import {
   ScrollView,
   Picker,
   StatusBar,
-  ToastAndroid,
   TouchableWithoutFeedback,
   BackHandler,
   TouchableOpacity,
@@ -34,7 +33,7 @@ import {
   UIActivityIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
-import Toast from 'react-native-simple-toast';
+import { Toast } from 'native-base';
 
 
 class EditScreen extends Component {
@@ -88,6 +87,14 @@ class EditScreen extends Component {
 
   componentDidMount(){
       let user_data = this.props.facebookToken.FirstLaunchCheck
+      this.setState({
+              "email": user_data.email,
+              "username": user_data.username,
+              "name": user_data.name,
+              "profile": user_data.profile,
+              "mobile": user_data.mobile_no,
+            })
+      return
       let data = {
         method: 'POST',
         credentials: 'same-origin',
@@ -107,6 +114,7 @@ class EditScreen extends Component {
         .then((responseJson) => {
           if(responseJson.result){
             let user_data2 = this.responseJson.data
+            console.log('edit user', user_data2)
             this.setState({
               "email": user_data2.email,
               "username": user_data2.username,
@@ -167,13 +175,11 @@ class EditScreen extends Component {
           }
           const result = Object.assign({}, this.props.facebookToken.FirstLaunchCheck, body);
           this.props.dispatch(firstLaunchCheck(result))
-          Toast.show("Profile Updated Successfully", Toast.SHORT)
           this.setState({isLoading: false})
           navigate('Home')
         }
         else {
           this.setState({isLoading: false})
-          Toast.show(responseJson, Toast.SHORT);
         }
       })
       .catch((error) =>{
@@ -227,7 +233,6 @@ class EditScreen extends Component {
             }
             const result = Object.assign({}, this.props.facebookToken.FirstLaunchCheck, body);
             this.props.dispatch(firstLaunchCheck(result))
-            Toast.show("Profile Updated Successfully", Toast.SHORT)
             navigate('Home')
             this.setState({isLoading: false})
 
@@ -238,7 +243,6 @@ class EditScreen extends Component {
         }
         else {
           this.setState({isLoading: false})
-          Toast.show(responseJson, Toast.SHORT);
         }
       })
       .catch((error) =>{

@@ -18,7 +18,6 @@ import {
   ImageBackground,
   Text,
   StatusBar,
-  ToastAndroid,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Modal,
@@ -37,7 +36,7 @@ import {
   UIActivityIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
-import Toast from 'react-native-simple-toast';
+import { Toast } from 'native-base';
 
 export default class ForgotPasswordScreen extends Component {
 
@@ -102,12 +101,10 @@ export default class ForgotPasswordScreen extends Component {
       .then((responseJson) => {
         if(responseJson.result){
           this.setState({isLoading: false})
-          Toast.show(responseJson.data.msg, Toast.SHORT)
 
         }
         else {
           this.setState({isLoading: false})
-          Toast.show(responseJson.error, Toast.SHORT);
         }
       })
       .catch((error) =>{

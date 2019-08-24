@@ -11,13 +11,12 @@ import {
   Alert,
   ScrollView,
   ImageBackground,
-  Picker,
   StatusBar,
-  ToastAndroid,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  CheckBox
 } from 'react-native';
+import { Container,CheckBox, Header, Content, Icon, Picker, Form } from "native-base";
+
 import Loader from './LoaderScreen';
 import {
   BallIndicator,
@@ -30,7 +29,6 @@ import {
   UIActivityIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
-import Toast from 'react-native-simple-toast';
 
 export default class RegisterScreen extends Component {
 
@@ -146,14 +144,12 @@ export default class RegisterScreen extends Component {
         .then((responseJson) => {
           if(responseJson.result){
             this.setState({isLoading: false})
-            Toast.show(responseJson.data.msg, Toast.SHORT)
             const {navigate} = this.props.navigation;
             navigate('LoginStack')
 
           }
           else {
             this.setState({isLoading: false})
-            Toast.show(responseJson.error, Toast.SHORT)
           }
         })
         .catch((error) =>{
@@ -161,7 +157,6 @@ export default class RegisterScreen extends Component {
         });
     }
     else {
-      Toast.show('Please Enter All Fields', Toast.SHORT);
       this.setState({isLoading: false})
 
     }
@@ -307,8 +302,13 @@ export default class RegisterScreen extends Component {
             <View style={{alignSelf:'center', borderWidth: 2, borderRadius: 10, borderColor: 'white',  width: '90%'}}>
 
             <Picker
+                  mode="dropdown"
+                  placeholder="Select user type"
+                  placeholderStyle={{ color: "white" }}
+                  placeholderIconColor="white"
+                  
                   selectedValue={this.state.type}
-                  style={{height: 50, color: 'white'}}
+                  textStyle={{color: 'white'}}
                   itemStyle={{backgroundColor:'#fff'}}
                   onValueChange={(itemValue, itemIndex) =>
                     this.setState({type: itemValue})
@@ -321,8 +321,13 @@ export default class RegisterScreen extends Component {
             <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center', marginTop: 10}}>
               <View style={{width: '40%',marginRight: '5%', alignSelf:'center', borderRadius: 10, borderWidth: 2, borderColor: 'white',}}>
               <Picker
+                  mode="dropdown"
+                  placeholder="Select your country"
+                  placeholderStyle={{ color: "white" }}
+                  placeholderIconColor="white"
+                  
                 selectedValue={this.state.country}
-                style={{height: 50, borderBottomColor: 'grey', color: 'white'}}
+                textStyle={{borderBottomColor: 'grey', color: 'white'}}
                 onValueChange={(itemValue, itemIndex) =>
                   this.updateCity(itemValue)
                 }>
@@ -331,8 +336,13 @@ export default class RegisterScreen extends Component {
               </View>
               <View style={{width: '40%', marginLeft: '5%', borderRadius: 10, alignSelf: 'center', borderWidth: 2, borderColor: 'white',}}>
               <Picker
+                  mode="dropdown"
+                  placeholder="Select your city"
+                  placeholderStyle={{ color: "white" }}
+                  placeholderIconColor="white"
+                  
                 selectedValue={this.state.city}
-                style={{height: 50, color: 'white'}}
+                textStyle={{ color: 'white'}}
                 onValueChange={(itemValue, itemIndex) =>
                   this.setState({city: itemValue})
                 }>
@@ -340,12 +350,13 @@ export default class RegisterScreen extends Component {
               </Picker>
               </View>
             </View>
-            <View style={{flexDirection: 'row', marginTop: 10, justifyContent: 'center'}}>
+            <View style={{flexDirection: 'row', margin: 20, justifyContent: 'center'}}>
             <CheckBox
-                value={this.state.sure}
-                onChange={() => this.setState({sure: !this.state.sure})}
+                checked={this.state.sure}
+                color="white"
+                onPress={() => this.setState({sure: !this.state.sure})}
             />
-            <Text style={{top: 6, color: 'white'}}>Are you Sure About that ?</Text>
+            <Text style={{left: 20, color: 'white'}}>Are you Sure About that ?</Text>
             </View>
             <View style={{flexDirection: 'row', height: 70, justifyContent: 'center', marginTop: 10}}>
             <TouchableOpacity 

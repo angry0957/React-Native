@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Image, WebView, BackHandler } from 'react-native';
 
 import {createStackNavigator, createAppContainer} from 'react-navigation';
+import { Toast } from 'native-base';
 
 
 export default class ProfileScreen extends React.Component {

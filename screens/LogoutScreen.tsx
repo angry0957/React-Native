@@ -17,6 +17,7 @@ import {connect} from 'react-redux'
 import { firstLaunchCheck, INC, DEC } from "../actions/index";
 import LogoutHelper from './LogoutHeloper';
 import HomeScreen from './Home';
+import { Toast } from 'native-base';
 
 
 export default class LogoutScreenDetail extends Component {

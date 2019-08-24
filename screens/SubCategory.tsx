@@ -14,7 +14,7 @@ import {
   Alert,
   AsyncStorage
 } from 'react-native';
-import Toast from 'react-native-simple-toast';
+import { Toast } from 'native-base';
 import {connect} from 'react-redux'
 import { firstLaunchCheck, INC, DEC } from "../actions/index";
 import { BackHandler } from 'react-native';

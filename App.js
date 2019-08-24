@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, AsyncStorage, Image, } from "react-native";
 import QuestionsScreen from "./screens/question";
 //import AnswersScreen from './screens/answer'
 import ProfileScreen from "./screens/profile";
+import { Root } from "native-base";
 
 import Nav from './navigator';
 
@@ -32,9 +33,12 @@ export default class App extends React.Component {
   render() {   
 
     return (
+      <Root>
+
       <Provider store={store}>
         <Nav />
       </Provider>
+      </Root>
     );
   }
 }
