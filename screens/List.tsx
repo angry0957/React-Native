@@ -29,6 +29,7 @@ import {
   UIActivityIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
+import Toast from 'react-native-simple-toast';
 
 
 class ListScreen extends Component {
@@ -81,6 +82,7 @@ class ListScreen extends Component {
           this.setState({data: responseJson.data.products, isLoading: false})
         }
         else {
+          Toast.show(responseJson.error, Toast.SHORT)
           this.setState({isLoading: false})
         }
       })
@@ -126,9 +128,9 @@ class ListScreen extends Component {
       .then((responseJson) => {
         if(responseJson.result){
           this.setState({data: responseJson.data.products, isLoading: false})
-          
         }
         else {
+          Toast.show(responseJson.error, Toast.SHORT)
           this.setState({isLoading: false})
         }
       })

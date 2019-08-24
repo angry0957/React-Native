@@ -8,6 +8,7 @@ import { BackHandler } from 'react-native';
 import AnimatedLoader from "react-native-animated-loader";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {Linking} from 'react-native'
+import Toast from 'react-native-simple-toast';
 import call from 'react-native-phone-call'
 import sms from 'react-native-sms-linking'
 import {
@@ -32,6 +33,8 @@ class HelloWorld extends React.Component {
             isLoading: true
         }
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+        this.sms_helper = this.sms_helper.bind(this);
+        this.call_helper = this.call_helper.bind(this);
     }
 
     componentWillMount() {
@@ -77,6 +80,26 @@ class HelloWorld extends React.Component {
             this.setState({isLoading: false})
           });
       }
+
+    sms_helper(){
+      if(!this.state.data.user.mobile_no){
+        Toast.show("Number Not Found", Toast.SHORT);
+        return
+      }
+      sms(this.state.data.user.mobile_no, 'Hi friend').catch(console.error)
+    }
+
+    call_helper(){
+      if(!this.state.data.user.mobile_no){
+        Toast.show("Number Not Found", Toast.SHORT);
+        return
+      }
+      const args = {
+        number: this.state.data.user.mobile_no, // String value with the number to call
+        prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
+      }
+      call(args).catch(console.error)
+    }
     
     render() {
       let Loading:any = '';
@@ -98,6 +121,9 @@ class HelloWorld extends React.Component {
           for(let i=0;i<this.state.data.pictures.length; i++){
               pic_data[i] = {url: this.state.data.pictures[i]}
           }
+          if(pic_data.length == 0){
+            pic_data[0] = {uri: 'http://www.4motiondarlington.org/wp-content/uploads/2013/06/No-image-found.jpg'}
+          }
           return (
             <ImageBackground source={require('../assets/BG.png')} style={styles.body}>
 
@@ -112,7 +138,7 @@ class HelloWorld extends React.Component {
                     dataSource={pic_data}/>
                 </View>
                 <View style={{flex: 1}}>
-                <ScrollView>
+                <ScrollView style={{flex: 0.8}}>
 
                 <View style={{flex: 1, flexDirection: 'row'}}>
                     <View style={{flex: 1/2}}>
@@ -138,25 +164,30 @@ class HelloWorld extends React.Component {
                     <View style={{flex: 0.7}}>
                         {Object.values(this.state.data.post_fields).map((title) => <Text style={{height: 50, color: 'white', fontSize: 12, padding: 10, borderColor: 'white',borderLeftWidth: 1, borderBottomWidth: 1}}>{title}</Text>)}
                     </View>
-                </View>
-                  <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
+                </View>  
+                </ScrollView>
+                <View style={{flex: 0.2}}>
+
+                <View style={{flex: 1, justifyContent: 'flex-end', flexDirection: 'row', marginBottom: 5}}>
                     <View style={{flex: 0.5}}>
                       <TouchableOpacity
-                        style={{padding: 15, margin: 10, backgroundColor: 'orange', borderColor: 'white', botderWidth: 3, borderRadius: 10}}
-                        onPress={()=> sms(this.state.data.user.mobile_no, 'Hi friend').catch(console.error)}>
+                        style={{padding: 8, margin: 10, backgroundColor: 'orange', borderColor: 'white', botderWidth: 3, borderRadius: 10}}
+                        onPress={this.sms_helper}>
                         <Text style={{color: 'white', alignSelf: 'center'}}>SMS</Text>
                       </TouchableOpacity>
                     </View>
                     <View style={{flex: 0.5}}>
                     <TouchableOpacity
-                        style={{padding: 15, margin: 10, backgroundColor: 'orange', borderColor: 'white', botderWidth: 3, borderRadius: 10}}
-                        onPress={()=> call(args).catch(console.error)}
+                        style={{padding: 8, margin: 10, backgroundColor: 'orange', borderColor: 'white', botderWidth: 3, borderRadius: 10}}
+                        onPress={this.call_helper}
                       >
                         <Text style={{color: 'white', alignSelf: 'center'}}>CALL</Text>
                       </TouchableOpacity>
                     </View>
-                  </View>  
-                </ScrollView>
+                  </View>
+
+                </View>
+
                 </View>
             </View>
             </ImageBackground>

@@ -114,6 +114,9 @@ export const Navigator = createDrawerNavigator(
       Home: { screen: HomeScreen,
           navigationOptions: ({ navigate, navigation }) => ({
             title: 'Easy Rent Sale',
+            headerRight: (
+              <Text></Text>
+            ),  
             headerLeft: (
               <TouchableWithoutFeedback
                 onPress={() => navigation.openDrawer()}

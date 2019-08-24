@@ -19,6 +19,7 @@ import {
   Text,
   StatusBar,
   Input,
+  BackHandler,
   TextInput,
   ToastAndroid,
   TouchableOpacity,
@@ -63,6 +64,20 @@ export default class ContactDetailScreen extends React.Component {
         isLoading: false,
       }
       this.contact = this.contact.bind(this)
+      this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+    }
+  
+    componentWillMount() {
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+  
+    componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+  
+    handleBackButtonClick() {
+      this.props.navigation.navigate('Home');
+      return true;
     }
 
     _pickImg = async () => {

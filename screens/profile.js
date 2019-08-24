@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, WebView } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, WebView, BackHandler } from 'react-native';
 
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 
@@ -10,6 +10,24 @@ export default class ProfileScreen extends React.Component {
       drawerIcon: () =><Image resizeMode={'contain'}  style={{height: 20, width: 30}} source={require('../assets/MyAdsIcon.png')}
                         />
     };
+
+    constructor(props){
+      super(props)  
+      this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+    }
+  
+    componentWillMount() {
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+  
+    componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+  
+    handleBackButtonClick() {
+      this.props.navigation.openDrawer();
+      return true;
+    }
 
     
     render() {
@@ -30,7 +48,24 @@ export class PricingScreen extends React.Component {
                         />
     };
 
-    
+    constructor(props){
+      super(props)  
+      this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+    }
+  
+    componentWillMount() {
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+  
+    componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+  
+    handleBackButtonClick() {
+      this.props.navigation.openDrawer();
+      return true;
+    }
+
     render() {
       const {navigate} = this.props.navigation;
       return (
@@ -48,6 +83,23 @@ export class PricingScreen extends React.Component {
       drawerIcon: () =><Image resizeMode={'contain'}  style={{height: 20, width: 30}} source={require('../assets/AdPostingIcon.png')}
                         />
     };
+    constructor(props){
+      super(props)  
+      this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+    }
+  
+    componentWillMount() {
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+  
+    componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+  
+    handleBackButtonClick() {
+      this.props.navigation.openDrawer();
+      return true;
+    }
 
     
     render() {
@@ -67,6 +119,7 @@ export class PricingScreen extends React.Component {
       drawerIcon: () =><Image resizeMode={'contain'}  style={{height: 20, width: 30}} source={require('../assets/EasyTaxi.png')}
                         />
     };
+
 
     
     render() {
@@ -91,6 +144,7 @@ export class PricingScreen extends React.Component {
       drawerIcon: () =><Image resizeMode={'contain'}  style={{height: 20, width: 30}} source={require('../assets/HomeDelevery.png')}
                         />
     };
+
 
     
     render() {

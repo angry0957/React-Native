@@ -139,7 +139,6 @@ class SideMenu extends React.Component {
       </Image>
       </TouchableWithoutFeedback>
 
-
         return (
             <View style={styles.container}>
               <ScrollView>
@@ -147,7 +146,7 @@ class SideMenu extends React.Component {
                   <View style={{flex: 0.5}}>
                     <Image
                       source={this.props.facebookToken.FirstLaunchCheck.loggedIn ? {uri: this.state.data.profile}: require('../assets/User.png')}
-                      style={{height: 100, width: 100, borderRadius: 100/2}}
+                      style={{height: 100, width: 100, borderRadius: 100/2, borderColor: 'white', borderWidth: 10}}
                     />
                   </View>
                   <View style={{flex: 0.5, justifyContent:'center'}}>

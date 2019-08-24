@@ -15,6 +15,7 @@ import {
   StatusBar,
   ToastAndroid,
   TouchableWithoutFeedback,
+  BackHandler,
   TouchableOpacity,
   CheckBox
 } from 'react-native';
@@ -54,8 +55,21 @@ class EditScreen extends Component {
       this.update = this.update.bind(this)
       this.change = this.change.bind(this);
       this.changePassword = this.changePassword.bind(this);
-
-  }
+      this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+    }
+  
+    componentWillMount() {
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+  
+    componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+  
+    handleBackButtonClick() {
+      this.props.navigation.navigate('Home');
+      return true;
+    }
 
   _pickImg = async () => {
     let pickerResult = await ImagePicker.launchImageLibraryAsync({
@@ -73,15 +87,41 @@ class EditScreen extends Component {
   };
 
   componentDidMount(){
-    let user_data = this.props.facebookToken.FirstLaunchCheck
-    this.setState({
-      "email": user_data.email,
-      "username": user_data.username,
-      "name": user_data.name,
-      "profile": user_data.profile,
-      "mobile": user_data.mobile_no,
-
-    })
+      let user_data = this.props.facebookToken.FirstLaunchCheck
+      let data = {
+        method: 'POST',
+        credentials: 'same-origin',
+        mode: 'same-origin',
+        body: JSON.stringify({
+          token: user_data.token,
+          user_id: user_data.user_id
+        }),
+        headers: {
+          'Accept':       'application/json',
+          'Content-Type': 'application/json',
+        }
+      }
+  
+      fetch('https://www.easyrentsale.com/api/profile', data)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          if(responseJson.result){
+            let user_data2 = this.responseJson.data
+            this.setState({
+              "email": user_data2.email,
+              "username": user_data2.username,
+              "name": user_data2.name,
+              "profile": user_data2.profile,
+              "mobile": user_data2.mobile_no,
+            })
+          }
+          else {
+            this.setState({isLoading: false})
+          }
+        })
+        .catch((error) =>{
+          this.setState({isLoading: false})
+        });
   }
 
   change(){
@@ -95,7 +135,7 @@ class EditScreen extends Component {
     if (this.state.pickerResult == null){
       profile = user_data.profile
     }
-    else {
+    else if(this.state.pickerResult.base64) {
       profile = this.state.pickerResult.base64
     }
     let data2 = {
@@ -147,7 +187,7 @@ class EditScreen extends Component {
     const {navigate} = this.props.navigation;
     let user_data = this.props.facebookToken.FirstLaunchCheck
     let profile = ''
-    if (this.state.pickerResult == null){
+    if (this.state.pickerResult == null || this.state.pickerResult.cancelled == true){
       profile = user_data.profile
     }
     else {
@@ -233,7 +273,7 @@ class EditScreen extends Component {
           {pickerResult
             ? <Image
                 source={{uri: imageUri}}
-                style={{ width: 100, height: 100, borderRadius: 100/2 }}
+                style={{ width: 100, height: 100, borderRadius: 100/2, borderColor: 'white', borderWidth: 10 }}
               />
             : profile}
         </TouchableOpacity>
