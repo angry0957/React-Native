@@ -129,6 +129,11 @@ class ListScreen extends Component {
           this.setState({data: responseJson.data.products, isLoading: false})
         }
         else {
+          Toast.show({
+              text: responseJson.error,
+              buttonText: 'Okay',
+              type: "danger"
+               })
           this.setState({isLoading: false})
         }
       })

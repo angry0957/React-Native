@@ -29,6 +29,7 @@ import {
   UIActivityIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
+import { Toast } from 'native-base';
 
 export default class RegisterScreen extends Component {
 
@@ -145,10 +146,20 @@ export default class RegisterScreen extends Component {
           if(responseJson.result){
             this.setState({isLoading: false})
             const {navigate} = this.props.navigation;
+            Toast.show({
+              text: responseJson.data,
+              buttonText: 'Okay',
+              type: "success"
+               })
             navigate('LoginStack')
 
           }
           else {
+            Toast.show({
+              text: responseJson.error,
+              buttonText: 'Okay',
+              type: "danger"
+               })
             this.setState({isLoading: false})
           }
         })
@@ -157,6 +168,11 @@ export default class RegisterScreen extends Component {
         });
     }
     else {
+      Toast.show({
+              text: 'Please enter all fields',
+              buttonText: 'Okay',
+              type: "danger"
+               })
       this.setState({isLoading: false})
 
     }

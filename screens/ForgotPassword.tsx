@@ -100,10 +100,20 @@ export default class ForgotPasswordScreen extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         if(responseJson.result){
+          Toast.show({
+              text: responseJson.data,
+              buttonText: 'Okay',
+              type: "success"
+               })
           this.setState({isLoading: false})
 
         }
         else {
+          Toast.show({
+              text: responseJson.error,
+              buttonText: 'Okay',
+              type: "danger"
+               })
           this.setState({isLoading: false})
         }
       })

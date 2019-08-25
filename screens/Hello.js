@@ -93,7 +93,7 @@ class HelloWorld extends React.Component {
         return
       }
       const args = {
-        number: '923089134961',//this.state.data.user.mobile_no, // String value with the number to call
+        number: this.state.mobile_no,//this.state.data.user.mobile_no, // String value with the number to call
         prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
       }
       call(args).catch(console.error)
@@ -124,7 +124,7 @@ class HelloWorld extends React.Component {
               {Loading}
                 <Text style={{color: 'white', fontSize: 24}}>{this.state.data.title}</Text>
                 <Text style={{color: 'white', fontSize: 12}}>{this.state.data.city.name} | Added at {this.state.data.created_at} | Ad ID : {this.state.data.post_id}</Text>
-                <View style={{height: 300, alignSelf:'center'}}>
+                <View style={{height: 200, alignSelf:'center'}}>
                     <Slideshow 
                     resizeMode={'contain'}   /* <= changed  */
                     style={{ height: 80, width: '60%', top: 30, bottom: 20}}

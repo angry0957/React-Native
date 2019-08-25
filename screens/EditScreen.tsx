@@ -175,10 +175,21 @@ class EditScreen extends Component {
           }
           const result = Object.assign({}, this.props.facebookToken.FirstLaunchCheck, body);
           this.props.dispatch(firstLaunchCheck(result))
+          Toast.show({
+              text: responseJson.data,
+              buttonText: 'Okay',
+              type: "success"
+               })
           this.setState({isLoading: false})
+
           navigate('Home')
         }
         else {
+          Toast.show({
+              text: responseJson.error,
+              buttonText: 'Okay',
+              type: "danger"
+       })
           this.setState({isLoading: false})
         }
       })
@@ -233,6 +244,11 @@ class EditScreen extends Component {
             }
             const result = Object.assign({}, this.props.facebookToken.FirstLaunchCheck, body);
             this.props.dispatch(firstLaunchCheck(result))
+            Toast.show({
+              text: responseJson.data,
+              buttonText: 'Okay',
+              type: "success"
+               })
             navigate('Home')
             this.setState({isLoading: false})
 
@@ -242,6 +258,11 @@ class EditScreen extends Component {
           }
         }
         else {
+          Toast.show({
+              text: responseJson.error,
+              buttonText: 'Okay',
+              type: "danger"
+       })
           this.setState({isLoading: false})
         }
       })
