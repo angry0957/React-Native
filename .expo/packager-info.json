@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 1481,
-  "expoServerNgrokUrl": "https://m6-83p.anonymous.react-native.exp.direct",
-  "packagerNgrokUrl": "https://packager.m6-83p.anonymous.react-native.exp.direct",
-  "ngrokPid": 1489,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }

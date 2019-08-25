@@ -83,6 +83,12 @@ class HelloWorld extends React.Component {
 
     sms_helper(){
       if(!this.state.data.user.mobile_no){
+
+          Toast.show({
+              text: 'Number not found',
+              buttonText: 'Okay',
+              type: "danger"
+               })
         return
       }
       sms(this.state.data.user.mobile_no, 'Hi friend').catch(console.error)
@@ -90,6 +96,12 @@ class HelloWorld extends React.Component {
 
     call_helper(){
       if(!this.state.data.user.mobile_no){
+
+          Toast.show({
+              text: 'Number not found',
+              buttonText: 'Okay',
+              type: "danger"
+               })
         return
       }
       const args = {
