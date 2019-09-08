@@ -22,6 +22,8 @@ import Loader from './LoaderScreen';
 import {connect} from 'react-redux'
 import { firstLaunchCheck, INC, DEC } from "../actions/index";
 import * as ImagePicker from 'expo-image-picker'
+import Constants from 'expo-constants';
+
 import {
   BallIndicator,
   BarIndicator,
@@ -34,6 +36,7 @@ import {
   WaveIndicator,
 } from 'react-native-indicators';
 import { Toast } from 'native-base';
+import * as Permissions from 'expo-permissions';
 
 
 class EditScreen extends Component {
@@ -70,6 +73,15 @@ class EditScreen extends Component {
       return true;
     }
 
+    getPermissionAsync = async () => {
+      if (Constants.platform.ios) {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
+        }
+      }
+    }
+
   _pickImg = async () => {
     let pickerResult = await ImagePicker.launchImageLibraryAsync({
       base64: true,
@@ -85,7 +97,8 @@ class EditScreen extends Component {
     });
   };
 
-  componentDidMount(){
+  async componentDidMount(){
+    this.getPermissionAsync();
       let user_data = this.props.facebookToken.FirstLaunchCheck
       this.setState({
               "email": user_data.email,

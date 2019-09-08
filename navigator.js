@@ -38,7 +38,7 @@ const AuthStackNavigation = createStackNavigator({
     headerMode: 'none',
     navigationOptions: {
       header: null,
-    },  
+    }, 
   },
   
   RegisterStack: { 

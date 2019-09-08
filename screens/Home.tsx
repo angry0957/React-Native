@@ -165,10 +165,10 @@ class HomeScreen extends Component {
     return (
       <ImageBackground source={require('../assets/BG.png')} style={styles.body}>
 
-      <View style={styles.container}>
-        <Text style={{color: 'white', alignSelf: 'center', fontSize: 30, padding: 5}}>WELCOME TO <Text style={{color: 'red'}}>EASI</Text>
+      <View style={styles.container}> 
+        <Text style={{color: 'white', alignSelf: 'center', fontSize: 15, padding: 5}}>WELCOME TO <Text style={{color: 'red'}}>EASY</Text>
         </Text>
-        <Text style={{color: 'white', alignSelf: 'center', fontSize: 20, padding: 5}}>Choose Your Service</Text>
+        <Text style={{color: 'white', alignSelf: 'center', fontSize: 15, padding: 5}}>Choose Your Service</Text>
         {Loading}
 
         <ScrollView>
@@ -184,7 +184,7 @@ class HomeScreen extends Component {
           </View>} //method to render the data in the way you want using styling u need
           horizontal={false}
           numColumns={3}
-          />
+          />   
         </ScrollView>
       </View>
       </ImageBackground>
@@ -214,4 +214,4 @@ function mapStateToProps(state) {
     };
   };
   export default connect(mapStateToProps, mapDispatchToEvents)(withNavigation(HomeScreen))
-  
+     

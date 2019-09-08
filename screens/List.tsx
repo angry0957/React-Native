@@ -11,12 +11,14 @@ import {
   FlatList,
   ScrollView,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+
 } from 'react-native';
 import {connect} from 'react-redux'
 import { firstLaunchCheck, INC, DEC } from "../actions/index";
 import { BackHandler } from 'react-native';
 import AnimatedLoader from "react-native-animated-loader";
+
 import {
   BallIndicator,
   BarIndicator,
@@ -28,8 +30,11 @@ import {
   UIActivityIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
-import { Container,CheckBox, Header, Content, Icon, Picker, Form } from "native-base";
+import { Container,CheckBox, Header, Content,Picker, Form } from "native-base";
 import { Toast } from 'native-base';
+import { SearchBar,Input } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 
 class ListScreen extends Component {
@@ -44,6 +49,7 @@ class ListScreen extends Component {
       isLoading: true,
     }
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+    this.arrayholder = [];
   }
 
   componentWillMount() {
@@ -80,8 +86,13 @@ class ListScreen extends Component {
       .then((responseJson) => {
         if(responseJson.result){
           this.setState({data: responseJson.data.products, isLoading: false})
-        }
-        else {
+            
+          
+        this.arrayholder = responseJson.data.products;
+
+
+        } 
+                else {
           this.setState({isLoading: false})
         }
       })
@@ -90,6 +101,7 @@ class ListScreen extends Component {
       });
 
   }
+
 
   update(type){
     this.setState({
@@ -121,7 +133,7 @@ class ListScreen extends Component {
         'Content-Type': 'application/json',
       }
     }
-
+    
     fetch('https://www.easyrentsale.com/api/product', data)
       .then((response) => response.json())
       .then((responseJson) => {
@@ -143,6 +155,25 @@ class ListScreen extends Component {
 
   }
 
+  searchFilterFunction = text => {
+    this.setState({
+      value: text,
+    });
+
+    const newData = this.arrayholder.filter(item => {
+      const itemData = `${item.title.toUpperCase()} 
+      }`;
+      const textData = text.toUpperCase();
+
+      return itemData.indexOf(textData) > -1;
+    });
+    this.setState({
+      data: newData,
+    });
+  };
+
+
+
   move(item){
     let pass = this.props.facebookToken.FirstLaunchCheck
     const {navigate} = this.props.navigation;
@@ -156,7 +187,7 @@ class ListScreen extends Component {
     
     let Loading:any = '';
     if (this.state.isLoading) {
-      Loading =   <DotIndicator color='grey' />
+      Loading =   <DotIndicator color='#318080' />
 
     }
     else{
@@ -165,8 +196,11 @@ class ListScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={{height: 60, backgroundColor: '#318080', padding: 10}}>
+        <View style={{height: 60, backgroundColor: '#318080', padding: 20}}>
+         
           <View style={{flex: 1, flexDirection: 'row'}}>
+            
+        
             <View style={{flex: 1/3, flexDirection: 'row'}}>
               <CheckBox
                     checked={this.state.all}
@@ -193,7 +227,24 @@ class ListScreen extends Component {
             </View>
           </View>
         </View>
-        {Loading}
+        <View style={{height: 50, borderWidth: 2, margin: 10, borderRadius: 50, borderColor: '#318080'}}>
+
+        <Input
+         style={{borderBottomWidth:0}}
+        underlineColorAndroid="transparent"
+    placeholder='Search Here'
+  errorStyle={{ color: 'red' }}
+  errorMessage=''
+  onChangeText={text => this.searchFilterFunction(text)}
+  autoCorrect={false}
+  value={this.state.value}
+/>
+
+</View>
+
+    <View style={{marginTop:20}}>       
+    {Loading}
+
         <ScrollView>
         <FlatList
           data={this.state.data}
@@ -215,6 +266,7 @@ class ListScreen extends Component {
           </View>} //method to render the data in the way you want using styling u need
           />
         </ScrollView>
+        </View>
       </View>
     );
   }
@@ -222,8 +274,8 @@ class ListScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
+     // flex: 1,
+      //backgroundColor: '#fff',
     }
 });  
 function mapStateToProps(state) {
