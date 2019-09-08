@@ -188,13 +188,7 @@ class EditScreen extends Component {
           }
           const result = Object.assign({}, this.props.facebookToken.FirstLaunchCheck, body);
           this.props.dispatch(firstLaunchCheck(result))
-          Toast.show({
-              text: responseJson.data,
-              buttonText: 'Okay',
-              type: "success"
-               })
-          this.setState({isLoading: false})
-
+          this.setState({isLoading: false});
           navigate('Home')
         }
         else {
@@ -241,12 +235,11 @@ class EditScreen extends Component {
         'Content-Type': 'application/json',
       }
     }
-
     fetch('https://www.easyrentsale.com/api/updateprofile', data)
       .then((response) => response.json())
       .then((responseJson) => {
         if(responseJson.result){
-            if(this.state.password == ''){
+          if(this.state.password == ''){
               this.setState({isLoading: false})
             let body = {
               "username": this.state.username,
@@ -258,13 +251,13 @@ class EditScreen extends Component {
             const result = Object.assign({}, this.props.facebookToken.FirstLaunchCheck, body);
             this.props.dispatch(firstLaunchCheck(result))
             Toast.show({
-              text: responseJson.data,
+              text: responseJson.data.msg,
               buttonText: 'Okay',
               type: "success"
                })
             navigate('Home')
             this.setState({isLoading: false})
-
+            return
           }
           else{
             this.changePassword()

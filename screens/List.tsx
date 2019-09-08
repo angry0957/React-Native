@@ -195,12 +195,10 @@ class ListScreen extends Component {
     }
 
     return (
-      <View style={styles.container}>
-        <View style={{height: 60, backgroundColor: '#318080', padding: 20}}>
+      <View style={{flex: 1}}>
+        <View style={{flex: 0.05, height: 60, backgroundColor: '#318080', padding: 20}}>
          
           <View style={{flex: 1, flexDirection: 'row'}}>
-            
-        
             <View style={{flex: 1/3, flexDirection: 'row'}}>
               <CheckBox
                     checked={this.state.all}
@@ -226,24 +224,25 @@ class ListScreen extends Component {
               <Text style={{color: 'white', left: 15}}>Rent</Text>
             </View>
           </View>
+          
         </View>
-        <View style={{height: 50, borderWidth: 2, margin: 10, borderRadius: 50, borderColor: '#318080'}}>
+        <View style={{flex:0.1}}>
+          <View style={{ borderWidth: 2, margin: 10, borderRadius: 50, borderColor: '#318080'}}>
+            <TextInput
+              style={{padding: 15, height: 40}}
+              underlineColorAndroid="transparent"
+              placeholder='Search Here'
+              errorStyle={{ color: 'red' }}
+              errorMessage=''
+              onChangeText={text => this.searchFilterFunction(text)}
+              autoCorrect={false}
+              value={this.state.value}
+            />
+          </View>
+        </View>
 
-        <Input
-         style={{borderBottomWidth:0}}
-        underlineColorAndroid="transparent"
-    placeholder='Search Here'
-  errorStyle={{ color: 'red' }}
-  errorMessage=''
-  onChangeText={text => this.searchFilterFunction(text)}
-  autoCorrect={false}
-  value={this.state.value}
-/>
-
-</View>
-
-    <View style={{marginTop:20}}>       
-    {Loading}
+    <View style={{flex: 0.85, marginTop:20}}>       
+        {Loading}
 
         <ScrollView>
         <FlatList
@@ -274,7 +273,7 @@ class ListScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-     // flex: 1,
+     flex: 0.2,
       //backgroundColor: '#fff',
     }
 });  
