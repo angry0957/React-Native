@@ -33,11 +33,11 @@ export default class DrawerContent extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-        <View style={{flexDirection: 'row', height: 150, margin: 20, backgroundColor: 'lightGreen'}}>
-          <View style={{flex: 0.5}}>
+        <View style={{flexDirection: 'row', height: 150, margin: 20, backgroundColor: '#048080',marginTop:20}}>
+          <View style={{flex: 0.5,marginTop:10}}>
             <Image
               source={require('../assets/Abdul.jpg')}
-              style={{height: 100, width: 100, borderRadius: 100/2}}
+              style={{height: 20, width: 80, borderRadius: 80/2}}
             />
           </View>
           <View style={{flex: 0.5, justifyContent:'center'}}>

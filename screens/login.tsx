@@ -72,21 +72,21 @@ class LoginScreen extends Component {
     const {navigate} = this.props.navigation;
     AsyncStorage.multiGet(['user_id', "token", "loggedIn"], (err, data) => {
       this.setState({isAppReady: true})
-      if(data[0][1] != '' && data[0][1] != undefined && data[0][1] != null){
+      if(data[0][1] != '' && data[0][1] != undefined && data[0][1] != null)
+      {
         let user_id = parseInt(data[0][1])
         let token = parseInt(data[1][1])
         this.props.dispatch(firstLaunchCheck({"loggedIn": true,"token": token, "user_id": user_id}))
         navigate('Home_')
 
       }
-    
     });
   }
 
   blur(){
     if (!this.state.email){
       this.setState({emailRequired: true})
-    }
+    }    
     if (!this.state.email){
       this.setState({passwordRequired: true})
     } 
@@ -119,6 +119,7 @@ class LoginScreen extends Component {
        })
       return
     }
+    //else 
     this.setState({isLoading: true})
     let data = {
       method: 'POST',
@@ -204,7 +205,7 @@ class LoginScreen extends Component {
       <View style={styles.container}>
       <Image
           source={require('../assets/Logo.png')}
-          resizeMode={'contain'}   /* <= changed  */
+                resizeMode={'contain'}   /* <= changed  */
           style={{ height: 150, top: 30, bottom: 20}}
         />
       </View>

@@ -141,11 +141,11 @@ class SideMenu extends React.Component {
         return (
             <View style={styles.container}>
               <ScrollView>
-                <View style={{flexDirection: 'row', height: 150, padding: 20, backgroundColor: '#024b30'}}>
+                <View style={{flexDirection: 'row', height: 150, padding: 29,paddingBottom:18, backgroundColor: '#194B48'}}>
                   <View style={{flex: 0.5}}>
                     <Image
                       source={this.props.facebookToken.FirstLaunchCheck.loggedIn ? {uri: this.state.data.profile}: require('../assets/User.png')}
-                      style={{height: 100, width: 100, borderRadius: 100/2, borderColor: 'white', borderWidth: 10}}
+                      style={{height: 85, width: 85, borderRadius: 85/2, borderColor: 'white', borderWidth: 3}}
                     />
                   </View>
                   <View style={{flex: 0.5, justifyContent:'center'}}>

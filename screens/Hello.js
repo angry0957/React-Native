@@ -1,4 +1,3 @@
-
 import React from "react";
 import {connect} from 'react-redux'
 import { firstLaunchCheck, INC, DEC } from "../actions/index";
@@ -104,11 +103,7 @@ class HelloWorld extends React.Component {
                })
         return
       }
-      const args = {
-        number: this.state.mobile_no,//this.state.data.user.mobile_no, // String value with the number to call
-        prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
-      }
-      call(args).catch(console.error)
+      Linking.openURL(`tel://${this.state.data.user.mobile_no}`)
     }
     
     render() {
@@ -126,8 +121,12 @@ class HelloWorld extends React.Component {
           for(let i=0;i<this.state.data.pictures.length; i++){
               pic_data[i] = {url: this.state.data.pictures[i]}
           }
-          if(pic_data.length == 0){
-            pic_data[0] = {uri: 'http://www.4motiondarlington.org/wp-content/uploads/2013/06/No-image-found.jpg'}
+          if(pic_data.length == 0){ 
+
+            pic_data[0] = 
+          
+          
+            {uri: 'http://www.4motiondarlington.org/wp-content/uploads/2013/06/No-image-found.jpg'}
           }
           return (
             <ImageBackground source={require('../assets/BG.png')} style={styles.body}>
@@ -176,16 +175,17 @@ class HelloWorld extends React.Component {
                 <View style={{flex: 1, justifyContent: 'flex-end', flexDirection: 'row', marginBottom: 5}}>
                     <View style={{flex: 0.5}}>
                       <TouchableOpacity
-                        style={{padding: 8, margin: 10, backgroundColor: 'orange', borderColor: 'white', botderWidth: 3, borderRadius: 10}}
+                        style={{padding: 6, margin: 6, backgroundColor: 'orange', borderColor: 'white', botderWidth: 3, borderRadius: 10}}
                         onPress={this.sms_helper}>
                         <Text style={{color: 'white', alignSelf: 'center'}}>SMS</Text>
                       </TouchableOpacity>
                     </View>
                     <View style={{flex: 0.5}}>
                     <TouchableOpacity
-                        style={{padding: 8, margin: 10, backgroundColor: 'orange', borderColor: 'white', botderWidth: 3, borderRadius: 10}}
+                        style={{padding: 6, margin: 6, backgroundColor: 'orange', borderColor: 'white', botderWidth: 3, borderRadius: 10}}
                         onPress={this.call_helper}
                       >
+
                         <Text style={{color: 'white', alignSelf: 'center'}}>CALL</Text>
                       </TouchableOpacity>
                     </View>
