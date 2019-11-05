@@ -35,7 +35,7 @@ export default class ProfileScreen extends React.Component {
       const {navigate} = this.props.navigation;
       return (
         <WebView
-          source={{uri: 'https://easyrentsale.com/user/Admin?token='}}
+          source={{uri: 'https://easyrentsale.com/user/Admin?token=' + this.props.facebookToken.FirstLaunchCheck.token}}
           style={{marginTop: 20}}
         />
       );
@@ -71,7 +71,7 @@ export class PricingScreen extends React.Component {
       const {navigate} = this.props.navigation;
       return (
         <WebView
-        source={{uri: 'https://easyrentsale.com/pricing'}}
+        source={{uri: 'https://easyrentsale.com/pricing?token=' + this.props.facebookToken.FirstLaunchCheck.token}}
         style={{marginTop: 20}}
       />
       );
@@ -107,7 +107,7 @@ export class PricingScreen extends React.Component {
       const {navigate} = this.props.navigation;
       return (
         <WebView
-          source={{uri: 'https://easyrentsale.com/product/add?token'}}
+          source={{uri: 'https://easyrentsale.com/product/add?token=' + this.props.facebookToken.FirstLaunchCheck.token}}
           style={{marginTop: 20}}
         />
       );

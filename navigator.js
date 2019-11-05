@@ -121,7 +121,7 @@ export const Navigator = createDrawerNavigator(
               <TouchableWithoutFeedback
                 onPress={() => navigation.openDrawer()}
               >
-                  <Image style={{height: 30, width: 30, marginLeft: 10}} source={require('./assets/MenuIcon.png')}/>
+                  <Image style={{height: 30, width: 30, marginLeft: 10}} source={require('./assets/more-vertical.png')}/>
                 </TouchableWithoutFeedback>),
             headerStyle: { backgroundColor: '#318080'},
             headerTitleStyle: {textAlign: 'center', flex: 1, color: 'white'},

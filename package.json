@@ -8,10 +8,11 @@
   "dependencies": {
     "expo": "^33.0.0",
     "expo-constants": "^5.0.1",
+    "expo-font": "~5.0.1",
     "expo-image-picker": "^5.0.2",
-    "native-base": "^2.13.5",
+    "native-base": "2.11.0",
     "prop-types": "*",
-    "react": "16.8.3",
+    "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-animated-loader": "0.0.7",
     "react-native-communications": "^2.2.1",
@@ -35,6 +36,10 @@
     "react-native-viewpager": "^0.2.13",
     "react-navigation": "3.11.0",
     "react-redux": "7.1.0",
+    "react-timer-mixin": "^0.13.4",
     "redux": "4.0.1"
+  },
+  "devDependencies": {
+    "schedule": "^0.4.0"
   }
 }

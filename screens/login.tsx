@@ -5,7 +5,7 @@
  * @format
  * @flow
  */
-import { Toast } from 'native-base';
+// import { Toast } from 'native-base';
 
 import React, {Fragment, Component} from 'react';
 import {
@@ -16,6 +16,7 @@ import {
   Button,
   Alert,
   Image,
+  Toast,
   Text,
   StatusBar,
   TouchableOpacity,

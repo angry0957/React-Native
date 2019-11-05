@@ -6,6 +6,7 @@ import {
   View,
   TextInput,
   Button,
+  Toast,
   TouchableHighlight,
   Image,
   Alert,
@@ -15,8 +16,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native';
-import { Container,CheckBox, Header, Content, Icon, Picker, Form } from "native-base";
-
+import { Container,CheckBox, Header, Content, Picker, Form } from "native-base";
 import Loader from './LoaderScreen';
 import {
   BallIndicator,
@@ -29,7 +29,10 @@ import {
   UIActivityIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
-import { Toast } from 'native-base';
+// import { Toast } from 'native-base';
+import Expo from "expo";
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
 
 export default class RegisterScreen extends Component {
 
@@ -55,7 +58,12 @@ export default class RegisterScreen extends Component {
       this.register = this.register.bind(this)
   }
 
-  componentDidMount(){
+  async componentDidMount(){
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      ...Ionicons.font,
+    });
     let data = {
       method: 'POST',
       credentials: 'same-origin',
@@ -82,6 +90,10 @@ export default class RegisterScreen extends Component {
       .catch((error) =>{
         this.setState({isLoading: false})
       });
+    // await Expo.Font.loadAsync({
+    //     Ionicons: require('@expo/vector-icons/fonts/Ionicons.ttf'),
+    // });
+
   }
 
   updateCity(country){
@@ -316,13 +328,10 @@ export default class RegisterScreen extends Component {
           </View>
           <View style={{flex: 1, justifyContent: 'center', marginTop: 30}}>
             <View style={{alignSelf:'center', borderWidth: 2, borderRadius: 10, borderColor: 'white',  width: '90%'}}>
-
             <Picker
                   mode="dropdown"
                   placeholder="Select user type"
                   placeholderStyle={{ color: "white" }}
-                  placeholderIconColor="white"
-                  
                   selectedValue={this.state.type}
                   textStyle={{color: 'white'}}
                   itemStyle={{backgroundColor:'#fff'}}
@@ -340,8 +349,6 @@ export default class RegisterScreen extends Component {
                   mode="dropdown"
                   placeholder="Select your country"
                   placeholderStyle={{ color: "white" }}
-                  placeholderIconColor="white"
-                  
                 selectedValue={this.state.country}
                 textStyle={{borderBottomColor: 'grey', color: 'white'}}
                 onValueChange={(itemValue, itemIndex) =>

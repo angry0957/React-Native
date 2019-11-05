@@ -65,7 +65,7 @@ class HomeScreen extends Component {
       credentials: 'same-origin',
       mode: 'same-origin',
       body: JSON.stringify({
-        "token": ""
+        "token": this.props.facebookToken.FirstLaunchCheck.token
       }),
       headers: {
         'Accept':       'application/json',
@@ -73,7 +73,7 @@ class HomeScreen extends Component {
       }
     }
 
-    fetch('http://easyrentsale.com/api/getcategory', data)
+    fetch('https://easyrentsale.com/api/getcategory', data)
       .then((response) => response.json())
       .then((responseJson) => {
         if(responseJson.result){

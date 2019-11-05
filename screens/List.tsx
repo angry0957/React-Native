@@ -67,7 +67,8 @@ class ListScreen extends Component {
       mode: 'same-origin',
       body: JSON.stringify({
         "subcategory_id": this.props.facebookToken.FirstLaunchCheck.subcategory_id,
-        "type": "all"
+        "type": "all",
+        "token": this.props.facebookToken.FirstLaunchCheck.token
       }),
       headers: {
         'Accept':       'application/json',
@@ -114,7 +115,8 @@ class ListScreen extends Component {
       mode: 'same-origin',
       body: JSON.stringify({
         "subcategory_id": this.props.facebookToken.FirstLaunchCheck.subcategory_id,
-        "type": type
+        "type": type,
+        "token": this.props.facebookToken.FirstLaunchCheck.token
       }),
       headers: {
         'Accept':       'application/json',

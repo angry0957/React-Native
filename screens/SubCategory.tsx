@@ -70,7 +70,7 @@ class SubCategoryScreen extends Component {
       }
     }
 
-    fetch('http://easyrentsale.com/api/getsubcategory', data)
+    fetch('https://easyrentsale.com/api/getsubcategory', data)
       .then((response) => response.json())
       .then((responseJson) => {
         if(responseJson.result){
