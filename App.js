@@ -29,28 +29,38 @@ const store=createStore(allReducers);
 
 export default class App extends React.Component {
   constructor(props) {
-    super(props);    
+    super(props);
+    this.state = {
+      isReady: false
+    }
   }
 
   async componentDidMount() {
     await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
+      Roboto: require('./assets/native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('./assets/native-base/Fonts/Roboto_medium.ttf'),
+      Ionicons: require('./assets/native-base/Fonts/Ionicons.ttf')
     });
     this.setState({ isReady: true });
   }
 
   render() {   
-
-    return (
-      <Root>
-
-      <Provider store={store}>
-        <Nav />
-      </Provider>
-      </Root>
-    );
+    if (!this.state.isReady){
+      return(
+        <View>
+          <Text>Loading</Text>
+        </View>
+      )
+    }
+    else{
+      return (
+        <Root>
+        <Provider store={store}>
+          <Nav />
+        </Provider>
+        </Root>
+      );
+    }
   }
 }
 

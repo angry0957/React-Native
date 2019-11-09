@@ -3,9 +3,13 @@ import { StyleSheet, Text, View, Button, Image, WebView, BackHandler } from 'rea
 
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 import { Toast } from 'native-base';
+import {connect} from 'react-redux'
+import { firstLaunchCheck, INC, DEC } from "../actions/index";
+import Loader from './LoaderScreen';
+import { withNavigation } from 'react-navigation';
 
 
-export default class ProfileScreen extends React.Component {
+export class ProfileScreen extends React.Component {
     static navigationOptions = {
       title: 'My Ads',
       drawerIcon: () =><Image resizeMode={'contain'}  style={{height: 20, width: 30}} source={require('../assets/MyAdsIcon.png')}
@@ -33,6 +37,8 @@ export default class ProfileScreen extends React.Component {
     
     render() {
       const {navigate} = this.props.navigation;
+      console.log('asd', this.props.facebookToken.FirstLaunchCheck.token)
+      console.log('asd', 'https://easyrentsale.com/user/Admin?token=' + this.props.facebookToken.FirstLaunchCheck.token)
       return (
         <WebView
           source={{uri: 'https://easyrentsale.com/user/Admin?token=' + this.props.facebookToken.FirstLaunchCheck.token}}
@@ -41,6 +47,20 @@ export default class ProfileScreen extends React.Component {
       );
     }
   }
+  function mapStateToProps(state) {
+    return {
+        facebookToken: state
+    }
+  }
+  const mapDispatchToEvents = (dispatch) => {
+    return {
+      dispatch,
+      firstLaunchCheck
+    };
+  };
+export default connect(mapStateToProps, mapDispatchToEvents)(withNavigation(ProfileScreen))
+     
+  
 
 export class PricingScreen extends React.Component {
     static navigationOptions = {

@@ -75,7 +75,7 @@ class LoginScreen extends Component {
       if(data[0][1] != '' && data[0][1] != undefined && data[0][1] != null)
       {
         let user_id = parseInt(data[0][1])
-        let token = parseInt(data[1][1])
+        let token = data[1][1].toString()
         this.props.dispatch(firstLaunchCheck({"loggedIn": true,"token": token, "user_id": user_id}))
         navigate('Home_')
 
